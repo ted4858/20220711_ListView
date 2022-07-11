@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -30,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        Button button = findViewById(R.id.button);
+        EditText editText = (EditText)findViewById(R.id.editText);
+        Button createButton = findViewById(R.id.createButton);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int number = arrayList.size();
@@ -41,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if (number>0)
                     listView.setSelection(number-1);
+
+                editText.setText("");
+            }
+        });
+
+        Button deleteButton = findViewById(R.id.deleteButton);
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrayList.remove(0);
+                adapter.notifyDataSetChanged();
+                listView.setSelection(0);
             }
         });
     }
